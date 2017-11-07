@@ -1,0 +1,22 @@
+:root {
+    --text :#C5C8C6;
+    --back :#1D1F21;
+    --green:#B5BD68;
+}
+
+body {
+    margin:0;
+    background:var(--back);
+    color:var(--text);
+    font-size:1.5rem;
+    overflow:hidden;
+}
+
+button {
+    font-family:monospace;
+    background:transparent;
+    border:0;
+    position:absolute;
+    bottom:0.5em;
+    color:var(--green);
+}
