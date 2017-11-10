@@ -3,12 +3,112 @@
   <head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="./style.css">
-    <title>
-      Pro Coder
-    </title>
+    <title>GNU nano 2.8.7</title>
   </head>
   <body>
-    <script src="./bundle.js"></script>
+    <div id="application">
+      <div id="header">
+	<span id="app-name">
+	  GNU nano 2.8.7
+	</span>
+	<span id="buffer-name">
+	  New Buffer
+	</span>
+      </div>
+      
+      <div id="reserved-line-top"></div>
+      
+      <div id="text-buffer">
+	<br><br>
+	<pre><span id="text"></span><span id="cursor">&#9608</span></pre>
+	<div id="hook"></div>
+      </div>
+
+      <div id="reserved-line-bottom"></div>
+
+      <div id="options-menu">
+	<div id="options-container">
+	  <div class="option">
+	    [
+	    <span class"option-name">Typing speed:</span>
+	    
+	    <input type="text" id="type-speed-in" value="3">
+	    ]
+	  </div>
+	  <div class="option">
+	    [
+	    <span class"option-name">File URI:</span>
+	    
+	    <input type="text" id="file-uri-in" value="john">
+	    ]
+	  </div>
+	</div>
+      </div>
+      
+      <table id="hotkey-menu" cellpadding="0" cellspacing="0">
+	<tr id="hotkey-menu-row-1">
+	  <td class="hotkey-parent">
+	    <span class="hotkey-tip">^G</span>
+	    <span class="hotkey-name">Get Help</span>
+	  </td>
+	  <td class="hotkey-parent">
+	    <span class="hotkey-tip">^O</span>
+	    <span class="hotkey-name">Write Out</span>
+	  </td>
+	  <td class="hotkey-parent">
+	    <span class="hotkey-tip">^W</span>
+	    <span class="hotkey-name">Where is</span>
+	  </td>
+	  <td class="hotkey-parent">
+	    <span class="hotkey-tip">^K</span>
+	    <span class="hotkey-name">Cut Text</span>
+	  </td>
+	  <td class="hotkey-parent">
+	    <span class="hotkey-tip">^J</span>
+	    <span class="hotkey-name">Justify</span>
+	  </td>
+	  <td class="hotkey-parent">
+	    <span class="hotkey-tip">^C</span>
+	    <span class="hotkey-name">Cur Pos</span>
+	  </span>
+	  <td class="hotkey-parent">
+	    <span class="hotkey-tip">M-U</span>
+	    <span class="hotkey-name">Undo</span>
+	  </td>
+	</tr>
+	<tr id="hotkey-menu-row-2">
+	  <td class="hotkey-parent">
+	    <span class="hotkey-tip">^X</span>
+	    <span class="hotkey-name">Exit</span>
+	  </td>
+	  <td class="hotkey-parent">
+	    <span class="hotkey-tip">^R</span>
+	    <span class="hotkey-name">Read File</span>
+	  </td>
+	  <td class="hotkey-parent">
+	    <span class="hotkey-tip">^\</span>
+	    <span class="hotkey-name">Replace</span>
+	  </td>
+	  <td class="hotkey-parent">
+	    <span class="hotkey-tip">^U</span>
+	    <span class="hotkey-name">Uncut Text</span>
+	  </td>
+	  <td class="hotkey-parent">
+	    <span class="hotkey-tip">^T</span>
+	    <span class="hotkey-name">To Spell</span>
+	  </td>
+	  <td class="hotkey-parent">
+	    <span class="hotkey-tip">^_</span>
+	    <span class="hotkey-name">Go To Line</span>
+	  </td>
+	  <td class="hotkey-parent">
+	    <span class="hotkey-tip">M-E</span>
+	    <span class="hotkey-name">Redo</span>
+	  </td>
+	</tr>
+      </table>
+    </div>
+<script src="./bundle.js"></script>
   </body>
 </html>
 

@@ -1,22 +1,105 @@
 :root {
-    --text :#C5C8C6;
-    --back :#1D1F21;
-    --green:#B5BD68;
+    /*
+     * defines
+     */
+    --main:hsl(140, 3%, 78%);
+    --accent:hsl(210, 6%, 12%);
+    /* --main:hsl(140, 30%, 78%); */
+    /* --accent:hsl(210, 6%, 12%); */
+    /* --main:black; */
+    /* --accent:white; */
+    --font-size:1.5rem;
+    --line-height:1.0rem;
+    --full-width:100vw;
+
+    /*
+     * config
+     */
+    font-size:var(--font-size);
+    line-height:var(--line-height);
+         user-select:none;
+    -moz-user-select:none;
+    font-family:monospace;
 }
 
 body {
-    margin:0;
-    background:var(--back);
-    color:var(--text);
-    font-size:1.5rem;
+    background:var(--accent);
+    color:var(--main);
     overflow:hidden;
+    margin:0;
 }
 
-button {
-    font-family:monospace;
+#header {
+    display:grid;
+    position:fixed;
+    width:var(--full-width);
+    height:(--line-height);
+    top:0;
+    grid-template-columns:1fr auto 1.0fr;
+    background:var(--main);
+    color:var(--accent);
+}
+
+#reserved-line-top {
+    background:var(--accent);
+    width:var(--full-width);
+    height:var(--line-height);
+    top:var(--line-height);
+    position:fixed;
+}
+
+#reserved-line-bottom {
+    background:var(--accent);
+    width:var(--full-width);
+    height:calc(var(--line-height) * 3);
+    bottom:calc(var(--line-height) * 2);
+}
+
+#text-buffer {
+    z-index:-1;
+}
+
+
+#hotkey-menu {
+    width:var(--full-width);
+    background:var(--accent);
+    position:fixed;
+    bottom:0;
+    line-height:var(--line-height);
+}
+
+.hotkey-tip {
+    background:var(--main);
+    color:var(--accent);
+}
+
+#options-menu {
+    display:none;
+    position:fixed;
+    width:var(--full-width);
+    background:var(--accent);
+    bottom:calc(var(--line-height) * 2);
+}
+
+#options-container {
+    margin:auto;
+    width:40ch;
+    background:var(--main);
+    color:var(--accent);
+}
+
+.option {
+    text-align:center;
+}
+
+input[type=text] {
     background:transparent;
+    font-family:monospace;
+    font-size:1rem;
+    color:var(--accent);
     border:0;
-    position:absolute;
-    bottom:0.5em;
-    color:var(--green);
+}
+
+pre {
+    margin:0;
 }
