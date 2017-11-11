@@ -8,6 +8,25 @@ class Main {
 	    return document.getElementById(id) as HTMLElement;
 	}
 
+	const blink_cursor = () => {
+	    const on_off = (v:number) => {
+		return v % 2;
+	    }
+
+	    const cursor = $('cursor');
+	    let point = 1;
+
+	    /*
+	    ** if the user hits a key cursor will be set visible
+	    */
+	    win.addEventListener('keydown', (e:KeyboardEvent) => {
+		cursor.style.opacity = on_off(point = 1).toString();
+	    })
+	    setInterval(() => {
+		cursor.style.opacity = on_off(point++).toString();
+	    }, 500);
+	}
+
 	const set_random_app_version = () => {
 	    const rand = () => Math.random() * 10 | 0;
 	    const version_number = `${rand()}.${rand()}.${rand()}`;
@@ -89,6 +108,7 @@ class Main {
 	    });
 	}
 	set_random_app_version();
+	blink_cursor();
 	add_menu_listener();
     }
 }
