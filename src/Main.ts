@@ -1,68 +1,95 @@
 import { FileLoader } from './FileLoader';
-import { CodeElement } from './CodeElement';
-import { OptionsMenu } from './OptionsMenu';
-import { Iterator } from './Iterator';
-import { toArray } from './Strings';
-
-// const DEFAULT_URI:string = 'https://raw.githubusercontent.com/notEave/multilayer-simplex-noise/master/typescript/color/Colors.ts';
-
-//const DEFAULT_URI =  'https://raw.githubusercontent.com/notEave/asteroid-defender/master/js/asteroid-defender.js';
 
 const DEFAULT_URI:string = 'https://raw.githubusercontent.com/id-Software/Quake-III-Arena/master/code/game/q_math.c';
 
-//const DEFAULT_URI:string = 'https://raw.githubusercontent.com/torvalds/linux/master/fs/ext4/balloc.c';
-
 class Main {
     public static main(win:Window, doc:HTMLDocument):void {
-	const buffer = doc.getElementById('text') as HTMLSpanElement;
-	const header = doc.getElementById('buffer-name') as HTMLSpanElement;
-	const appname = doc.getElementById('app-name') as HTMLSpanElement;
-	const cur = doc.getElementById('cursor') as HTMLSpanElement;
-
-	const onoff = (v:number) => {
-	    return v % 2;
+	const $ = (id:string) => {
+	    return document.getElementById(id) as HTMLElement;
 	}
-	
-	let counter = 0;
 
-	(() => {
-	    setInterval(() => {
-		cur.style.opacity = onoff(counter++).toString();
-	    }, 500);
-	})();
+	const set_random_app_version = () => {
+	    const rand = () => Math.random() * 10 | 0;
+	    const version_number = `${rand()}.${rand()}.${rand()}`;
+	    
+	    $('version-number').innerText = version_number;
+	    doc.title = 'GNU nano ' + version_number;
+	}
 
-	const rand = () => Math.random() * 10 | 0;
+	const load_file = (uri:string, callback:(content:string) => void) => {
+	    new FileLoader(uri).setOnLoadEvent((content:string) => {
+		callback(content);
+	    }).load();
+	}
 
-	const major = rand();
-	const minor = rand();
-	const patch = rand();
+	const set_header_file_name = (name:string) => {
+	    $('buffer-name').innerText = 'File: ' + name;
+	}
 
-	appname.innerHTML = `&nbsp;&nbsp;GNU nano ${major}.${minor}.${patch}`;
-	doc.title = `GNU nano ${major}.${minor}.${patch}`;
-	const uri:string[] = DEFAULT_URI.split('/');
-	header.innerText = 'File: ' + uri[uri.length-1];
-	
-	new FileLoader(DEFAULT_URI)
-	    .setOnLoadEvent((content:string) => {
-		const len = 3;
+	const reset_header_file_name = () => {
+	    $('buffer-name').innerText = 'New Buffer';
+	}
+
+	const start_file_gen = () => {
+	    const input = read_in();
+
+	    set_header_file_name((() => {
+		const parts = input.uri.split('/');
+		return parts[parts.length-1];
+	    })());
+
+	    load_file(input.uri, (content:string) => {
 		let cursor = 0;
-
-		const render = () => {
-		    const write = content.substr(cursor, len);
-		    cursor += len;
-		    buffer.innerText += write;
-		    window.scrollTo(0, 1000000);
-		    
-		    if(cursor >= content.length) {
-			return;
+		const text = $('text');
+		const kbEvent = (e:KeyboardEvent) => {
+		    if(e.ctrlKey && e.key === 'r') {
+			win.removeEventListener('keydown', kbEvent);
+			text.innerText = '';
+			reset_header_file_name();
 		    } else {
-			requestAnimationFrame(render);
+			const snippet = content.substr(cursor, input.speed);
+			text.innerText += snippet;
+			cursor += input.speed;
+			window.scrollTo(0, 1000000);
 		    }
 		}
 
-		requestAnimationFrame(render)
-		
-	    }).load();
+		win.addEventListener('keydown', kbEvent);
+	    });
+	}
+
+	const read_in = () => {
+	    const type_speed = $('type-speed-in') as HTMLInputElement;
+	    const file_uri   = $('file-uri-in') as HTMLInputElement;
+
+	    return {
+		speed: parseInt(type_speed.value),
+		uri:   file_uri.value
+	    };
+	}
+
+	const add_menu_listener = () => {
+	    let visib:boolean = false;
+	    const options = $('options-menu');
+	    let id = 0;
+	    
+	    win.addEventListener('keydown', (e:KeyboardEvent) => {
+		if(e.key === 'r' && e.ctrlKey) {
+		    e.preventDefault();
+		    visib = !visib;
+		    
+		    if(visib) {
+			options.style.display = 'block';
+		    } else {
+			options.style.display = 'none';
+			/* call load routine */
+			start_file_gen();
+		    }
+		}
+	    });
+	}
+	set_random_app_version();
+	add_menu_listener();
     }
 }
 
