@@ -4,14 +4,14 @@
     */
     /* --main:hsl(140, 3%, 78%); */
     /* --accent:hsl(210, 6%, 12%); */
-    --bg-hue:270;
-    --fg-hue:210;
-    --main:hsl(var(--fg-hue), 30%, 78%);
-    --accent:hsl(var(--bg-hue), 6%, 12%);
-    /* --main:white; */
-    /* --accent:black; */
-    --font-size:1.4rem;
-    --line-height:1rem;
+    --fg-hue:140;
+    --bg-hue:210;
+    --fg-sat:3%;
+    --bg-sat:6%;
+    --main:hsl(var(--fg-hue), var(--bg-sat), 78%);
+    --accent:hsl(var(--bg-hue), var(--fg-sat), 12%);
+    --font-size:1.0rem;
+    --line-height:1.5rem;
     --full-width:100vw;
 
     /*

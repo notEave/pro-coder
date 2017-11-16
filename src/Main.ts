@@ -1,11 +1,38 @@
 import { FileLoader } from './FileLoader';
 
-const DEFAULT_URI:string = 'https://raw.githubusercontent.com/id-Software/Quake-III-Arena/master/code/game/q_math.c';
-
 class Main {
     public static main(win:Window, doc:HTMLDocument):void {
+	const sources:string[] = [
+	    'https://raw.githubusercontent.com/notEave/' +
+		'multilayer-simplex-noise/master/typescript/datastruct/Cast.ts',
+	    'https://raw.githubusercontent.com/notEave/' +
+		'multilayer-simplex-noise/master/typescript/maze-generation' +
+		'/MazePather.ts',
+	    'https://raw.githubusercontent.com/notEave/' +
+		'multilayer-simplex-noise/master/typescript/color/Colors.ts',
+	    'https://raw.githubusercontent.com/notEave/' +
+		'multilayer-simplex-noise/master/typescript/noise/Simplex.ts',
+	    'https://raw.githubusercontent.com/torvalds/linux/master/init/' +
+		'main.c',
+	    'https://raw.githubusercontent.com/torvalds/linux/master/crypto/' +
+		'sha512_generic.c',
+	    'https://raw.githubusercontent.com/torvalds/linux/master/fs/ext4/' +
+		'file.c',
+	    'https://raw.githubusercontent.com/id-Software/Quake-III-Arena/' +
+		'master/code/game/q_math.c'
+	];
+
 	const $ = (id:string) => {
 	    return document.getElementById(id) as HTMLElement;
+	}
+
+	const shuffle_source = () => {
+	    const uri_el = $('file-uri-in') as HTMLInputElement;
+	    console.log(uri_el.value);
+	    if(sources.indexOf(uri_el.value) !== -1) {
+		const index = Math.random() * sources.length | 0;
+		uri_el.value = sources[index];
+	    }
 	}
 
 	const blink_cursor = () => {
@@ -99,6 +126,7 @@ class Main {
 		    
 		    if(visib) {
 			options.style.display = 'block';
+			shuffle_source();
 		    } else {
 			options.style.display = 'none';
 			/* call load routine */
